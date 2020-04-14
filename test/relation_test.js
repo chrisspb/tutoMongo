@@ -5,13 +5,14 @@ describe('Test de relation', () => {
 
     it('Test de la taille de la liste de livres d un utilisateur', (done) => {
         let user1 = new User({
-            name: 'Nom', 
-            books: [{title: 'Lord of the rings'}, {title: 'Lord of the rings 2'}]
+            name: 'Nom'
         });
+
+        user1.books.push({title: 'Lord of the rings'});
 
         user1.save().then( () => {
             User.findOne({name: 'Nom'}).then( (user) => {
-                assert(user.books.length === 2);
+                assert(user.books.length === 1);
                 done();
             });
         })

@@ -12,8 +12,8 @@ before((done) => {
     
 });
 
-beforeEach('Delete old books', done => {
-    const books = mongoose.connection.collections.books,
+beforeEach('Delete old data', done => {
+    /*const books = mongoose.connection.collections.books,
         users = mongoose.connection.collections.users;
 
     // == const {books, users} = mongoose.connection.collections
@@ -21,5 +21,8 @@ beforeEach('Delete old books', done => {
         users.drop( () => {
             done();
         })
+    })*/
+    mongoose.connection.db.dropDatabase().then( () => {
+        done();
     })
 })
