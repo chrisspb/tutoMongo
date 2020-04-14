@@ -5,7 +5,7 @@ describe('Test update', () => {
     let book1;
     let newTitle = 'Game of thrones';
     beforeEach( (done) => {
-        book1 = new Book({title: 'Moby Dick'});
+        book1 = new Book({title: 'Moby Dick', totalPages: 0});
         book1.save().then(() => {
             done();
         })
@@ -27,6 +27,19 @@ describe('Test update', () => {
 
     it('Update by Model', (done) => {
         assertTitle(Book.updateOne({title: 'Moby Dick'}, {title: newTitle}), done);
+        // existe findOneAndUpdate({title: 'Moby Dick'}, {title: newTitle}) et findByIdAndUpdate
     });
+
+    // operators => https://docs.mongodb.com/manual/reference/operator/update/
+    it('Update with operator', (done) => {
+        Book.updateOne({title: 'Moby Dick'}, {$inc: {totalPages: 3}})
+        .then(() => {
+            Book.findOne({title: 'Moby Dick'}).then( (book) => {
+                assert(book.totalPages === 3);
+                done();
+            });
+        });
+    });
+
 
 });

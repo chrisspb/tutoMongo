@@ -6,7 +6,7 @@ describe('Test read', () => {
     let book1;
 
     beforeEach( (done) => {
-        book1 = new Book({title: 'Harry Potter'});
+        book1 = new Book({title: 'Harry Potter', totalPages: 0});
         book1.save().then(() => {
             done();
         })

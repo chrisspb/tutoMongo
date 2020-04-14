@@ -13,9 +13,13 @@ before((done) => {
 });
 
 beforeEach('Delete old books', done => {
-    const books = mongoose.connection.collections.books;
-    // == const {books} = mongoose.connection.collections
+    const books = mongoose.connection.collections.books,
+        users = mongoose.connection.collections.users;
+
+    // == const {books, users} = mongoose.connection.collections
     books.drop( () =>{
-        done();
+        users.drop( () => {
+            done();
+        })
     })
 })
